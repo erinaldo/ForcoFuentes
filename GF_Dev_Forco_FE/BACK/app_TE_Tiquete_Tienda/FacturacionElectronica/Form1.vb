@@ -467,6 +467,7 @@ Public Class Form1
         '
         '
         'koki
+        'koki2
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
