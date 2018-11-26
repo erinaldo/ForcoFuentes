@@ -1,0 +1,190 @@
+<%@ Master Language="VB" CodeFile="Master.master.vb" Inherits="MasterCRM3" %>
+
+<%@ Register Assembly="DevExpress.Web.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxMenu" TagPrefix="dx" %>
+<%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI" TagPrefix="asp" %>
+<%@ Register Assembly="eWorld.UI" Namespace="eWorld.UI" TagPrefix="ew" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    <link href="menu_assets/styles.css" rel="stylesheet" type="text/css" />
+    <link href="CSS/CRM.css" rel="stylesheet" type="text/css" />
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="menu_assets/menu_jquery.js"></script>
+
+
+    <%--   <script src="menu_assets/menu_jquery.js"></script>--%>
+
+    <%-- <script type="text/javascript">
+        function Cerrar_Pagina()
+    {
+
+    if (navigator.userAgent.indexOf("MSIE 6.0") > 0) 
+        window.opener="x";
+    if (parent.window.location == window.location)
+    {
+        window.open("","_self"); 
+        window.close();
+    }
+    else 
+        parent.window.close();
+
+    
+    }
+    </script>--%>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" AsyncPostBackTimeout="3600" 
+            runat="server" />
+        <table width="100%" style="height: 100%; background: whitesmoke" cellpadding="0"
+            cellspacing="0">
+            <tr>
+                <td style="width: 100%; height: 100%;" align="center" valign="top">
+                    <table width="100%" style="height: 600px; background: whitesmoke" cellpadding="0"
+                        cellspacing="0">
+                        <!-- Banner -->
+                        <tr>
+                            <td style="width: 100%; height: 120px" class="TopColor">
+                                <table width="100%" style="height: 100%;" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td align="left" style="width: 190px; height: 100%; background-repeat: no-repeat;"
+                                            valign="middle">
+                                            <img src="Images/logo_alpiste.jpg" />
+                                        </td>
+                                        <td align="right" colspan="2" style="background-position-x: right; background-image: url(Images/imagen_encabezado.png); background-repeat: no-repeat; height: 100%"
+                                            valign="top">
+                                            <asp:Button ID="btnCerrarSesion" runat="server" ForeColor="White" Height="27px" Text="CERRAR SESIÓN"
+                                                Width="120px" CssClass="Estilo_Boton" Font-Size="8pt"
+                                                OnClientClick="Cerrar_Pagina();" />&nbsp;
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <%--<td style="width: 100%; height: 15px; background-image: url(Images/linea_encabezado.png);"></td>--%>
+                        </tr>
+                        <!-- Menu Horizontal -->
+                        <tr>
+                            <td style="width: 100%; height: 50px; background-image: url(images/bg_toolbar2.png); background-repeat: repeat-x;">
+                                <table cellpadding="0" cellspacing="0" style="height: 100%" width="100%">
+                                    <tr>
+                                        <td style="width: 30%; height: 100%">
+                                            <asp:ContentPlaceHolder ID="cphMenu" runat="server">
+                                            </asp:ContentPlaceHolder>
+
+                                            <div id="noti_Container" style="margin-left: 1010px; padding-bottom: 10px;">
+                                                <asp:ImageButton ID="imgBtnPendientes" runat="server" ImageUrl="images/notification_alert.png" ToolTip="Pendientes" Visible="False" />
+                                                <div class="noti_bubble">
+                                                    <asp:Label ID="lblNotification" runat="server" Font-Bold="True" Font-Names="calibri"></asp:Label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="right" style="width: 20%; height: 100%" valign="middle">
+                                            <table>
+                                                <tr>
+                                                    <td align="right" valign="middle">
+                                                        <img alt="PersonBoss" height="24" src="Images/PersonBoss.png" width="24" />
+                                                    </td>
+                                                    <td align="left" valign="middle">
+                                                        <asp:Label ID="lblUserName" runat="server" Font-Bold="True" Font-Names="calibri"
+                                                            Font-Size="10pt" ForeColor="White" Text="Bienvenido [Usuario]"></asp:Label>
+                                                    </td>
+                                                    <td align="left" style="width: 15px" valign="middle">&nbsp;</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 100%; height: 550px">
+                                <table style="width: 100%; height: 100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td style="width: 15%; background-color: #5a5858;" align="left" valign="top" class="TopColor">
+                                            <div id='cssmenu'>
+                                                <ul>
+                                                    <li class='active'><a href='frmBienvenida.aspx'><span>Inicio</span></a></li>
+                                                    <li class='has-sub'><a href='#' id="Recursos"><span>Recursos Humanos</span></a>
+                                                        <ul>
+                                                            <li><a href='frmAccionPersonal.aspx' id="accion" runat="server" ><span>Acción de Personal</span></a></li>
+                                                            <li><a href='frmConstancia_Open.aspx' id="constancia" runat="server" ><span>Constancias</span></a></li>
+                                                            <li class='last'><a href='frmCupon_Open.aspx' id="cupon" runat="server" ><span>Cupones</span></a></li>                                                            
+                                                        </ul>
+                                                    </li>
+                                                    <li class='has-sub'><a href='#'><span>Gestión de Compras</span></a>
+                                                        <ul>
+                                                            <li><a href='frmOC_Sum_Open.aspx'><span id="sumopen" runat="server" >Orden de Suministros</span></a></li>                                                                                                                        
+                                                            <li><a href='frmOC_Sum_Pago_Open.aspx'><span id="sumpago" runat="server" >Pago de Suministros</span></a></li>
+                                                            <li><a href='frmOC_Detalle.aspx'><span id="Span1" runat="server" >Orden de Servicios</span></a></li>
+                                                            <%--<li><a href='frmCombo_Large.aspx'><span id="Span2" runat="server" >Requisa</span></a></li>                               --%>
+                                                        </ul>
+                                                    </li>
+                                                    <li class='has-sub'><a href='#'><span>Compras</span></a>
+                                                        <ul>
+                                                            <li><a href='frmBienvenida.aspx'><span>Rellenos</span></a></li>
+                                                            <li class='last'><a href='frmBienvenida.aspx'><span>Ordenes</span></a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class='has-sub'><a href='#'><span>Proyectos</span></a>
+                                                        <ul>
+                                                            <li><a href='frmPR_Open.aspx'><span>Open</span></a></li>
+                                                            <li><a href='frmPR_Data.aspx'><span>Solicitud</span></a></li>
+                                                            <li><a href='frmPR_Data_Budget.aspx'><span>Presupuesto</span></a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class='has-sub'><a href='#'><span>Administración</span></a>
+                                                        <ul>
+                                                            <li><a href='frmBienvenida.aspx'><span>Usuario</span></a></li>
+                                                            <li class='last'><a href='frmBienvenida.aspx'><span>Maquinas</span></a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <br />
+                                        </td>
+                                        <td style="width: 85%; height: 100%;" valign="top">
+                                            <table width="100%" style="height: 100%;" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td style="width: 90%; height: 100%;" align="center" valign="top">
+                                                        <table width="100%" style="height: 100%;" cellpadding="0" cellspacing="0">
+                                                            <tr>
+                                                                <td style="width: 98%; height: 24px; background-image: url(images/bg_titlemter.jpg); background-repeat: repeat-x;"
+                                                                    align="center" valign="top">
+                                                                    <asp:Label ID="lblTitle" runat="server" Text="Label" CssClass="TitleFont" ForeColor="Gray" Font-Size="Medium"></asp:Label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 98%; height: 100%" align="center" valign="top">
+                                                                    <asp:ContentPlaceHolder ID="cphContenido" runat="server">
+                                                                    </asp:ContentPlaceHolder>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <script language="javascript" type="text/javascript" src="EncodeURL.js"></script>
+
+        <script language="javascript" type="text/javascript" src="EncodeURL.js"></script>
+
+        <script type="text/javascript" src="jsUpdateProgress.js"></script>
+
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<NewDataSet>
+  <Tabla>
+    <nRecno>5</nRecno>
+    <Clave>50613091800310143850200100001010000000003100000001</Clave>
+    <NumeroCedulaEmisor>003101438502</NumeroCedulaEmisor>
+    <FechaEmisionDoc>2018-09-13T10:15:09.35-06:00</FechaEmisionDoc>
+    <Mensaje>1</Mensaje>
+    <MontoTotalImpuesto>0.0000</MontoTotalImpuesto>
+    <TotalFactura>782775.0000</TotalFactura>
+    <NumeroCedulaReceptor>3101555992</NumeroCedulaReceptor>
+    <NumeroConsecutivoReceptor>00100001050000000001</NumeroConsecutivoReceptor>
+    <ConsecutivoInterno>1</ConsecutivoInterno>
+    <dtmAdd>2018-09-14T15:56:08.393-06:00</dtmAdd>
+    <Inicio>1</Inicio>
+    <ATV_Usuario>cpj-3-101-555992@prod.comprobanteselectronicos.go.cr</ATV_Usuario>
+    <ATV_Password>ck_Q)iz(J!.$#v#6&gt;S^e</ATV_Password>
+    <Certificado>D:\\310155599214.p12</Certificado>
+    <Certificado_Password>1234</Certificado_Password>
+    <FechaEmision>2018-09-14T19:38:25.687-06:00</FechaEmision>
+  </Tabla>
+</NewDataSet>
