@@ -30,6 +30,8 @@ Partial Class Form1
         Me.btnMensajeRechazados = New System.Windows.Forms.Button()
         Me.btnVerificarEstado = New System.Windows.Forms.Button()
         Me.lblVerificarEstado = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblFecha = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -37,9 +39,9 @@ Partial Class Form1
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 55)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 139)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(582, 457)
+        Me.DataGridView1.Size = New System.Drawing.Size(582, 373)
         Me.DataGridView1.TabIndex = 1
         '
         'Timer1
@@ -62,7 +64,7 @@ Partial Class Form1
         '
         'btnMensajeRechazados
         '
-        Me.btnMensajeRechazados.Location = New System.Drawing.Point(618, 26)
+        Me.btnMensajeRechazados.Location = New System.Drawing.Point(1008, 31)
         Me.btnMensajeRechazados.Name = "btnMensajeRechazados"
         Me.btnMensajeRechazados.Size = New System.Drawing.Size(185, 23)
         Me.btnMensajeRechazados.TabIndex = 3
@@ -87,12 +89,36 @@ Partial Class Form1
         Me.lblVerificarEstado.TabIndex = 5
         Me.lblVerificarEstado.Text = "..."
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.White
+        Me.Label1.Location = New System.Drawing.Point(12, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(850, 24)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "app_TE_Tiendas Modificado Jorge López 17 Diciembre 2018 Menos Sucursales 105 y 13" &
+    "0"
+        '
+        'lblFecha
+        '
+        Me.lblFecha.AutoSize = True
+        Me.lblFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFecha.ForeColor = System.Drawing.Color.White
+        Me.lblFecha.Location = New System.Drawing.Point(116, 55)
+        Me.lblFecha.Name = "lblFecha"
+        Me.lblFecha.Size = New System.Drawing.Size(0, 24)
+        Me.lblFecha.TabIndex = 7
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Blue
-        Me.ClientSize = New System.Drawing.Size(1205, 513)
+        Me.ClientSize = New System.Drawing.Size(1156, 544)
+        Me.Controls.Add(Me.lblFecha)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblVerificarEstado)
         Me.Controls.Add(Me.btnVerificarEstado)
         Me.Controls.Add(Me.btnMensajeRechazados)
@@ -115,4 +141,6 @@ Partial Class Form1
     Friend WithEvents btnMensajeRechazados As Button
     Friend WithEvents btnVerificarEstado As Button
     Friend WithEvents lblVerificarEstado As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblFecha As Label
 End Class

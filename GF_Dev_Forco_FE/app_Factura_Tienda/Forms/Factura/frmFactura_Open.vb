@@ -88,7 +88,7 @@ Public Class frmFactura_Open
         '            " AND CONCEPTO = " & vnConcepto &
         '            " ORDER BY FACTURA"
 
-        strSQL = "SELECT * FROM vw_GB_Facturas"
+        strSQL = "SELECT * FROM vw_GB_Facturas ORDER BY ID"
         '-
         ds = funFillDataSet(strSQL)
         '--
@@ -98,12 +98,14 @@ Public Class frmFactura_Open
         funOcultarTodasLasColumnas(Me.GridView1)
         indice = 0
         '--
+        funSetColumna(GridView1, "ID", "ID", funIndice(), 50, 1)
+        funSetColumna(GridView1, "FECHA", "FECHA", funIndice(), 80, 1)
         funSetColumna(GridView1, "SUCURSAL_ID", "SUCURSAL_ID", funIndice(), 60, 1)
         funSetColumna(GridView1, "SUCURSAL", "SUCURSAL", funIndice(), 120, 1)
         funSetColumna(GridView1, "CAJA", "CAJA", funIndice(), 60, 1)
         funSetColumna(GridView1, "FACTURA", "FACTURA", funIndice(), 60, 1)
-        funSetColumna(GridView1, "CLIENTE_ID", "CLIENTE_ID", funIndice(), 60, 1)
-        funSetColumna(GridView1, "CLIENTE", "CLIENTE", funIndice(), 150, 1)
+        funSetColumna(GridView1, "CLIENTE_ID", "CLIENTE_ID", funIndice(), 80, 1)
+        funSetColumna(GridView1, "CLIENTE", "CLIENTE", funIndice(), 250, 1)
         funSetColumna(GridView1, "CONSECUTIVO", "CONSECUTIVO", funIndice(), 150, 1)
         funSetColumna(GridView1, "CLAVE", "CLAVE", funIndice(), 320, 1)
         funSetColumna(GridView1, "RECEPCION", "RECEPCION", funIndice(), 80, 1)
@@ -142,4 +144,7 @@ Public Class frmFactura_Open
             MsgBox(ex.Message)
         End Try
     End Sub
+
+
+
 End Class

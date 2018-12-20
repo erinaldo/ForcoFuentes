@@ -22,17 +22,16 @@ Partial Class frmFactura_Open
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmFactura_Open))
-        Dim SuperToolTip10 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
-        Dim ToolTipTitleItem10 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
-        Dim ToolTipItem10 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
-        Dim SuperToolTip11 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
-        Dim ToolTipTitleItem11 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
-        Dim ToolTipItem11 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
-        Dim SuperToolTip12 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
-        Dim ToolTipTitleItem12 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
-        Dim ToolTipItem12 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
+        Dim SuperToolTip4 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
+        Dim ToolTipTitleItem4 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim ToolTipItem4 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
+        Dim SuperToolTip5 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
+        Dim ToolTipTitleItem5 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim ToolTipItem5 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
+        Dim SuperToolTip6 As DevExpress.Utils.SuperToolTip = New DevExpress.Utils.SuperToolTip()
+        Dim ToolTipTitleItem6 As DevExpress.Utils.ToolTipTitleItem = New DevExpress.Utils.ToolTipTitleItem()
+        Dim ToolTipItem6 As DevExpress.Utils.ToolTipItem = New DevExpress.Utils.ToolTipItem()
         Me.barRecord = New DevExpress.XtraBars.BarStaticItem()
         Me.RibbonControl1 = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.btnSalir = New DevExpress.XtraBars.BarButtonItem()
@@ -45,7 +44,7 @@ Partial Class frmFactura_Open
         Me.btnExcel = New DevExpress.XtraBars.BarButtonItem()
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
-        Me.DefaultLookAndFeel1 = New DevExpress.LookAndFeel.DefaultLookAndFeel(Me.components)
+        Me.DefaultLookAndFeel1 = New DevExpress.LookAndFeel.DefaultLookAndFeel()
         Me.GrupoGeneral = New DevExpress.XtraEditors.GroupControl()
         Me.bbProceso = New DevExpress.XtraEditors.SimpleButton()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -90,12 +89,12 @@ Partial Class frmFactura_Open
         Me.btnSalir.Id = 21
         Me.btnSalir.LargeGlyph = CType(resources.GetObject("btnSalir.LargeGlyph"), System.Drawing.Image)
         Me.btnSalir.Name = "btnSalir"
-        ToolTipTitleItem10.Text = "Atención !!!"
-        ToolTipItem10.LeftIndent = 6
-        ToolTipItem10.Text = "Cerrar esta pantalla"
-        SuperToolTip10.Items.Add(ToolTipTitleItem10)
-        SuperToolTip10.Items.Add(ToolTipItem10)
-        Me.btnSalir.SuperTip = SuperToolTip10
+        ToolTipTitleItem4.Text = "Atención !!!"
+        ToolTipItem4.LeftIndent = 6
+        ToolTipItem4.Text = "Cerrar esta pantalla"
+        SuperToolTip4.Items.Add(ToolTipTitleItem4)
+        SuperToolTip4.Items.Add(ToolTipItem4)
+        Me.btnSalir.SuperTip = SuperToolTip4
         '
         'btnNuevo
         '
@@ -103,12 +102,12 @@ Partial Class frmFactura_Open
         Me.btnNuevo.Id = 22
         Me.btnNuevo.LargeGlyph = CType(resources.GetObject("btnNuevo.LargeGlyph"), System.Drawing.Image)
         Me.btnNuevo.Name = "btnNuevo"
-        ToolTipTitleItem11.Text = "Atención !!!"
-        ToolTipItem11.LeftIndent = 6
-        ToolTipItem11.Text = "Agregar una Orden de Entrega"
-        SuperToolTip11.Items.Add(ToolTipTitleItem11)
-        SuperToolTip11.Items.Add(ToolTipItem11)
-        Me.btnNuevo.SuperTip = SuperToolTip11
+        ToolTipTitleItem5.Text = "Atención !!!"
+        ToolTipItem5.LeftIndent = 6
+        ToolTipItem5.Text = "Agregar una Orden de Entrega"
+        SuperToolTip5.Items.Add(ToolTipTitleItem5)
+        SuperToolTip5.Items.Add(ToolTipItem5)
+        Me.btnNuevo.SuperTip = SuperToolTip5
         '
         'btnEditar
         '
@@ -116,12 +115,12 @@ Partial Class frmFactura_Open
         Me.btnEditar.Id = 24
         Me.btnEditar.LargeGlyph = CType(resources.GetObject("btnEditar.LargeGlyph"), System.Drawing.Image)
         Me.btnEditar.Name = "btnEditar"
-        ToolTipTitleItem12.Text = "Atención !!!"
-        ToolTipItem12.LeftIndent = 6
-        ToolTipItem12.Text = "Editar una Orden de Entrega"
-        SuperToolTip12.Items.Add(ToolTipTitleItem12)
-        SuperToolTip12.Items.Add(ToolTipItem12)
-        Me.btnEditar.SuperTip = SuperToolTip12
+        ToolTipTitleItem6.Text = "Atención !!!"
+        ToolTipItem6.LeftIndent = 6
+        ToolTipItem6.Text = "Editar una Orden de Entrega"
+        SuperToolTip6.Items.Add(ToolTipTitleItem6)
+        SuperToolTip6.Items.Add(ToolTipItem6)
+        Me.btnEditar.SuperTip = SuperToolTip6
         '
         'bCodigo
         '

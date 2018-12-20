@@ -1,0 +1,948 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{48FCE584-59B5-4CA2-A7DF-766ACBA9760E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>app_Fabrik.sysMHCP.Program</StartupObject>
+    <RootNamespace>app_Fabrik</RootNamespace>
+    <AssemblyName>app_Fabrik</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>app_Fabrik.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>app_Fabrik.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>Off</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icono_Stick_House.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Component, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Component.dll</HintPath>
+    </Reference>
+    <Reference Include="Component.Data.SQL.Layer, Version=1.0.2727.1096, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Component.Data.SQL.Layer.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.ClientDoc, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.ReportAppServer.ClientDoc.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.ReportAppServer.CommLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommonControls, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommonObjectModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.ReportAppServer.CommonObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.Controllers, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.ReportAppServer.Controllers.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CubeDefModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.ReportAppServer.CubeDefModel.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.ReportAppServer.DataDefModel.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.DataSetConversion, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.ReportAppServer.DataSetConversion.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.ObjectFactory, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.ReportAppServer.ObjectFactory.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.Prompting, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.ReportAppServer.Prompting.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.ReportDefModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.ReportAppServer.ReportDefModel.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.XmlSerialize, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.ReportAppServer.XmlSerialize.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SIMPRODE\SIMPRODE\bin\Debug\CrystalDecisions.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.BonusSkins.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Data.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.PivotGrid.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v16.1.Wizard, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Sparkline.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.CodeParser.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v16.1.UI, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v16.1.Extensions, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraVerticalGrid.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Seguridad, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Seguridad.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clases\clsCombos.vb" />
+    <Compile Include="Clases\clsComplementos.vb" />
+    <Compile Include="Clases\clsData.vb" />
+    <Compile Include="Clases\clsGlobales.vb" />
+    <Compile Include="Clases\clsLote.vb" />
+    <Compile Include="Clases\clsOrden.vb" />
+    <Compile Include="Clases\clsProducto.vb" />
+    <Compile Include="Clases\clsReporte.vb" />
+    <Compile Include="Clases\clsTablaDeTablas.vb" />
+    <Compile Include="Clases\clsUnidad.vb" />
+    <Compile Include="Clases\clsUsuarios.vb" />
+    <Compile Include="Clases\clsVistas.vb" />
+    <Compile Include="Forms\Catalogos\frmCliente_Open.Designer.vb">
+      <DependentUpon>frmCliente_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmCliente_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmCliente_Data.Designer.vb">
+      <DependentUpon>frmCliente_Data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmCliente_Data.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Factura\frmFacturaEx_Data.Designer.vb">
+      <DependentUpon>frmFacturaEx_Data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Factura\frmFacturaEx_Data.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Factura\frmFactura_Data.Designer.vb">
+      <DependentUpon>frmFactura_Data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Factura\frmFactura_Data.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Factura\frmFacturaEx_Open.Designer.vb">
+      <DependentUpon>frmFacturaEx_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Factura\frmFacturaEx_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Factura\frmFactura_Open.Designer.vb">
+      <DependentUpon>frmFactura_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Factura\frmFactura_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Factura\frmFactura_Seek3.Designer.vb">
+      <DependentUpon>frmFactura_Seek3.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Factura\frmFactura_Seek3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Factura\frmFactura_Seek2.Designer.vb">
+      <DependentUpon>frmFactura_Seek2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Factura\frmFactura_Seek2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Ajustes\frmInvAjuste_Data2.Designer.vb">
+      <DependentUpon>frmInvAjuste_Data2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Ajustes\frmInvAjuste_Data2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Ajustes\frmInvAjuste_Open.Designer.vb">
+      <DependentUpon>frmInvAjuste_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Ajustes\frmInvAjuste_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Ajustes\frmInvAjuste_Seek2.Designer.vb">
+      <DependentUpon>frmInvAjuste_Seek2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Ajustes\frmInvAjuste_Seek2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmBuscar.Designer.vb">
+      <DependentUpon>frmBuscar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmBuscar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmReceta_Detalle.Designer.vb">
+      <DependentUpon>frmReceta_Detalle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmReceta_Detalle.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmReceta_Open.Designer.vb">
+      <DependentUpon>frmReceta_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmReceta_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Quick\frmRepCierre.Designer.vb">
+      <DependentUpon>frmRepCierre.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Quick\frmRepCierre.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Quick\frmRepPro_Open.Designer.vb">
+      <DependentUpon>frmRepPro_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Quick\frmRepPro_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Quick\frmRepCompras_Open.Designer.vb">
+      <DependentUpon>frmRepCompras_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Quick\frmRepCompras_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Quick\frmRepMargen_Open.Designer.vb">
+      <DependentUpon>frmRepMargen_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Quick\frmRepMargen_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Quick\frmRepVentas_Open.Designer.vb">
+      <DependentUpon>frmRepVentas_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Quick\frmRepVentas_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepCertExisteFam.Designer.vb">
+      <DependentUpon>frmRepCertExisteFam.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepCertExisteFam.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepCertExisteFamNo.Designer.vb">
+      <DependentUpon>frmRepCertExisteFamNo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepCertExisteFamNo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepCertExisteItem.Designer.vb">
+      <DependentUpon>frmRepCertExisteItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepCertExisteItem.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepCertExisteItemNo.Designer.vb">
+      <DependentUpon>frmRepCertExisteItemNo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepCertExisteItemNo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepConsumoAct.Designer.vb">
+      <DependentUpon>frmRepConsumoAct.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepConsumoAct.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepConsumoConDep.Designer.vb">
+      <DependentUpon>frmRepConsumoConDep.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepConsumoConDep.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepConsumoConDep2.Designer.vb">
+      <DependentUpon>frmRepConsumoConDep2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepConsumoConDep2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepConsumoDepCtab.Designer.vb">
+      <DependentUpon>frmRepConsumoDepCtab.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepConsumoDepCtab.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepConsumoDetalle.Designer.vb">
+      <DependentUpon>frmRepConsumoDetalle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepConsumoDetalle.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepEntrada2.Designer.vb">
+      <DependentUpon>frmRepEntrada2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepEntrada2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepExistencias.Designer.vb">
+      <DependentUpon>frmRepExistencias.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepExistencias.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepKardex.Designer.vb">
+      <DependentUpon>frmRepKardex.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepKardex.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepMovimientos.Designer.vb">
+      <DependentUpon>frmRepMovimientos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepMovimientos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepPrecios.Designer.vb">
+      <DependentUpon>frmRepPrecios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepPrecios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepProveedor.Designer.vb">
+      <DependentUpon>frmRepProveedor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepProveedor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepSaldo2.Designer.vb">
+      <DependentUpon>frmRepSaldo2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepSaldo2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepSalida2.Designer.vb">
+      <DependentUpon>frmRepSalida2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepSalida2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepSearchItem.Designer.vb">
+      <DependentUpon>frmRepSearchItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepSearchItem.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepSearchItemNo.Designer.vb">
+      <DependentUpon>frmRepSearchItemNo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reportes\frmRepSearchItemNo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\General\frmCambiarEmpresa.designer.vb">
+      <DependentUpon>frmCambiarEmpresa.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\General\frmCambiarEmpresa.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Seguridad\frmCambiarPassword.designer.vb">
+      <DependentUpon>frmCambiarPassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Seguridad\frmCambiarPassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmConcepto_Data.Designer.vb">
+      <DependentUpon>frmConcepto_Data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmConcepto_Data.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmConcepto_Open.Designer.vb">
+      <DependentUpon>frmConcepto_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmConcepto_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmEmpresa_Data.Designer.vb">
+      <DependentUpon>frmEmpresa_Data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmEmpresa_Data.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmFamilia_Data.Designer.vb">
+      <DependentUpon>frmFamilia_Data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmFamilia_Data.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmFamilia_Open.Designer.vb">
+      <DependentUpon>frmFamilia_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmFamilia_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmOrden_Data.Designer.vb">
+      <DependentUpon>frmOrden_Data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmOrden_Data.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmAjustePro_Data2.Designer.vb">
+      <DependentUpon>frmAjustePro_Data2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmAjustePro_Data2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmAjustePro_Open.Designer.vb">
+      <DependentUpon>frmAjustePro_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmAjustePro_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmAjustePro_Seek2.Designer.vb">
+      <DependentUpon>frmAjustePro_Seek2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmAjustePro_Seek2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Procesos\frmInvCompra_Data.Designer.vb">
+      <DependentUpon>frmInvCompra_Data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Procesos\frmInvCompra_Data.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Procesos\frmInvCompra_Open.Designer.vb">
+      <DependentUpon>frmInvCompra_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Procesos\frmInvCompra_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Procesos\frmInvCompra_Seek2.Designer.vb">
+      <DependentUpon>frmInvCompra_Seek2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Procesos\frmInvCompra_Seek2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmOrden_Open.Designer.vb">
+      <DependentUpon>frmOrden_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Produccion\frmOrden_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Procesos\frmKardexOpen.Designer.vb">
+      <DependentUpon>frmKardexOpen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Procesos\frmKardexOpen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\General\frmLogin.designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\General\frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\General\frmMain.designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\General\frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Procesos\frmOpenRecalculaStock.Designer.vb">
+      <DependentUpon>frmOpenRecalculaStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Procesos\frmOpenRecalculaStock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmProducto_Data.Designer.vb">
+      <DependentUpon>frmProducto_Data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmProducto_Data.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmProducto_Open.Designer.vb">
+      <DependentUpon>frmProducto_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmProducto_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmProveedor_Data.Designer.vb">
+      <DependentUpon>frmProveedor_Data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmProveedor_Data.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmProveedor_Open.Designer.vb">
+      <DependentUpon>frmProveedor_Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmProveedor_Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Util\frmReportes.designer.vb">
+      <DependentUpon>frmReportes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Util\frmReportes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Seguridad\frmRolEdit.designer.vb">
+      <DependentUpon>frmRolEdit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Seguridad\frmRolEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmTablaDeTablas.designer.vb">
+      <DependentUpon>frmTablaDeTablas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmTablaDeTablas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmTablaDeTablasNew.designer.vb">
+      <DependentUpon>frmTablaDeTablasNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Catalogos\frmTablaDeTablasNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Seguridad\frmUserOpen.designer.vb">
+      <DependentUpon>frmUserOpen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Seguridad\frmUserOpen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Seguridad\frmUsuarios_Edit.designer.vb">
+      <DependentUpon>frmUsuarios_Edit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Seguridad\frmUsuarios_Edit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modulos\mdlCalculo.vb" />
+    <Compile Include="Modulos\modFormato.vb" />
+    <Compile Include="Modulos\modInventario.vb" />
+    <Compile Include="Modulos\modParametros.vb" />
+    <Compile Include="Modulos\modPrint.vb" />
+    <Compile Include="Modulos\modRutinas.vb" />
+    <Compile Include="Modulos\Program.vb" />
+    <Compile Include="Modulos\SQLHelper.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\Catalogos\frmCliente_Open.resx">
+      <DependentUpon>frmCliente_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Catalogos\frmCliente_Data.resx">
+      <DependentUpon>frmCliente_Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Factura\frmFacturaEx_Data.resx">
+      <DependentUpon>frmFacturaEx_Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Factura\frmFactura_Data.resx">
+      <DependentUpon>frmFactura_Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Factura\frmFacturaEx_Open.resx">
+      <DependentUpon>frmFacturaEx_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Factura\frmFactura_Open.resx">
+      <DependentUpon>frmFactura_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Factura\frmFactura_Seek3.resx">
+      <DependentUpon>frmFactura_Seek3.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Factura\frmFactura_Seek2.resx">
+      <DependentUpon>frmFactura_Seek2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Ajustes\frmInvAjuste_Data2.resx">
+      <DependentUpon>frmInvAjuste_Data2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Ajustes\frmInvAjuste_Open.resx">
+      <DependentUpon>frmInvAjuste_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Ajustes\frmInvAjuste_Seek2.resx">
+      <DependentUpon>frmInvAjuste_Seek2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Produccion\frmBuscar.resx">
+      <DependentUpon>frmBuscar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Produccion\frmReceta_Detalle.resx">
+      <DependentUpon>frmReceta_Detalle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Produccion\frmReceta_Open.resx">
+      <DependentUpon>frmReceta_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Quick\frmRepCierre.resx">
+      <DependentUpon>frmRepCierre.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Quick\frmRepPro_Open.resx">
+      <DependentUpon>frmRepPro_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Quick\frmRepCompras_Open.resx">
+      <DependentUpon>frmRepCompras_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Quick\frmRepMargen_Open.resx">
+      <DependentUpon>frmRepMargen_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Quick\frmRepVentas_Open.resx">
+      <DependentUpon>frmRepVentas_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepCertExisteFam.resx">
+      <DependentUpon>frmRepCertExisteFam.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepCertExisteFamNo.resx">
+      <DependentUpon>frmRepCertExisteFamNo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepCertExisteItem.resx">
+      <DependentUpon>frmRepCertExisteItem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepCertExisteItemNo.resx">
+      <DependentUpon>frmRepCertExisteItemNo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepConsumoAct.resx">
+      <DependentUpon>frmRepConsumoAct.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepConsumoConDep.resx">
+      <DependentUpon>frmRepConsumoConDep.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepConsumoConDep2.resx">
+      <DependentUpon>frmRepConsumoConDep2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepConsumoDepCtab.resx">
+      <DependentUpon>frmRepConsumoDepCtab.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepConsumoDetalle.resx">
+      <DependentUpon>frmRepConsumoDetalle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepEntrada2.resx">
+      <DependentUpon>frmRepEntrada2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepExistencias.resx">
+      <DependentUpon>frmRepExistencias.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepKardex.resx">
+      <DependentUpon>frmRepKardex.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepMovimientos.resx">
+      <DependentUpon>frmRepMovimientos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepPrecios.resx">
+      <DependentUpon>frmRepPrecios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepProveedor.resx">
+      <DependentUpon>frmRepProveedor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepSaldo2.resx">
+      <DependentUpon>frmRepSaldo2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepSalida2.resx">
+      <DependentUpon>frmRepSalida2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepSearchItem.resx">
+      <DependentUpon>frmRepSearchItem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reportes\frmRepSearchItemNo.resx">
+      <DependentUpon>frmRepSearchItemNo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\General\frmCambiarEmpresa.resx">
+      <DependentUpon>frmCambiarEmpresa.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Seguridad\frmCambiarPassword.resx">
+      <DependentUpon>frmCambiarPassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Catalogos\frmConcepto_Data.resx">
+      <DependentUpon>frmConcepto_Data.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Catalogos\frmConcepto_Open.resx">
+      <DependentUpon>frmConcepto_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Catalogos\frmEmpresa_Data.resx">
+      <DependentUpon>frmEmpresa_Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Catalogos\frmFamilia_Data.resx">
+      <DependentUpon>frmFamilia_Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Catalogos\frmFamilia_Open.resx">
+      <DependentUpon>frmFamilia_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Produccion\frmOrden_Data.resx">
+      <DependentUpon>frmOrden_Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Produccion\frmAjustePro_Data2.resx">
+      <DependentUpon>frmAjustePro_Data2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Produccion\frmAjustePro_Open.resx">
+      <DependentUpon>frmAjustePro_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Produccion\frmAjustePro_Seek2.resx">
+      <DependentUpon>frmAjustePro_Seek2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Procesos\frmInvCompra_Data.resx">
+      <DependentUpon>frmInvCompra_Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Procesos\frmInvCompra_Open.resx">
+      <DependentUpon>frmInvCompra_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Procesos\frmInvCompra_Seek2.resx">
+      <DependentUpon>frmInvCompra_Seek2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Produccion\frmOrden_Open.resx">
+      <DependentUpon>frmOrden_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Procesos\frmKardexOpen.resx">
+      <DependentUpon>frmKardexOpen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\General\frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\General\frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Procesos\frmOpenRecalculaStock.resx">
+      <DependentUpon>frmOpenRecalculaStock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Catalogos\frmProducto_Data.resx">
+      <DependentUpon>frmProducto_Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Catalogos\frmProducto_Open.resx">
+      <DependentUpon>frmProducto_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Catalogos\frmProveedor_Data.resx">
+      <DependentUpon>frmProveedor_Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Catalogos\frmProveedor_Open.resx">
+      <DependentUpon>frmProveedor_Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Util\frmReportes.resx">
+      <DependentUpon>frmReportes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Seguridad\frmRolEdit.resx">
+      <DependentUpon>frmRolEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Catalogos\frmTablaDeTablas.resx">
+      <DependentUpon>frmTablaDeTablas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Catalogos\frmTablaDeTablasNew.resx">
+      <DependentUpon>frmTablaDeTablasNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Seguridad\frmUserOpen.resx">
+      <DependentUpon>frmUserOpen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Seguridad\frmUsuarios_Edit.resx">
+      <DependentUpon>frmUsuarios_Edit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\licenses.licx" />
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icono_Stick_House.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

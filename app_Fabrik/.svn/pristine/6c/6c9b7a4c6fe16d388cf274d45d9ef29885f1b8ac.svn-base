@@ -1,0 +1,702 @@
+﻿Imports System
+Imports System.Data
+Imports System.Data.SqlClient
+
+Public Class frmInvCompra_Data
+    Dim varToday As Date
+    Dim ds As New DataSet
+    Dim bolInicio As Boolean
+    Dim i As Integer
+    Dim nTipoMovGrid As Integer
+    Dim r As Integer
+    Dim intTipoRegistro As Integer
+    Public vnOrden As Integer '- Numero de Orden para nuevos numeros y busqueda
+    Public vnRecno, nTipo, vnNumero, vnConcepto, vnTipoMovimiento As Integer
+    Dim vnProveedor As Integer
+
+    Private Sub frmInvCompra_Data_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        bolInicio = True
+        If nTipo = 1 Then
+            funCargaCombos()
+            funUpdateGrid()
+            Me.lkConcepto.EditValue = 5
+            '-- Obtenemos el nuevo numero de movimiento de inventario
+            Me.lblNumero.Text = funNuevoMovInventario(Me.lkConcepto.EditValue)
+            vnNumero = funNuevoMovInventario(Me.lkConcepto.EditValue)
+            '-- Obtener el tipo de movimiento
+            funGetTipoMovimiento()
+        Else
+            funCargaCombos()
+            funCargaData()
+            Me.lkConcepto.EditValue = vnConcepto
+            Me.lkProveedor.EditValue = vnProveedor
+            funUpdateGrid()
+            Me.lkConcepto.Enabled = False
+            Me.txtNotas.Enabled = False
+            Me.txtReferencia.Enabled = False
+            Me.bbSave.Enabled = False
+            Me.bbAdd.Enabled = False
+            Me.bbEdit.Enabled = False
+            Me.dtpFecha.Enabled = False
+            '-- 
+            Me.txtOrden.Enabled = False
+            Me.txtFactura.Enabled = False
+            Me.dtpOrden.Enabled = False
+            Me.dtpFactura.Enabled = False
+            Me.lkProveedor.Enabled = False
+            Me.dtpRecibe.Enabled = False
+            Me.txtRecibido.Enabled = False
+            Me.txtAutorizado.Enabled = False
+            '-- Me.cbDescuento.Enabled = False
+            funCalculoTotalProducto()
+        End If
+        bolInicio = False
+    End Sub
+
+    Private Function funDesactivar()
+        Me.bbSave.Enabled = False
+        Me.bbAdd.Enabled = False
+        Me.bbEdit.Enabled = False
+        Me.txtNotas.Enabled = False
+        Me.gcDetalle.Enabled = False
+        Return True
+    End Function
+
+    Private Sub funUpdateGrid()
+        '--
+        strSQL = "SELECT * " & _
+                    "FROM Inv_Movto_Inventario_Detalle " & _
+                    "WHERE nNumero = " & Me.vnNumero & " " & _
+                    "AND nConcepto = " & CDbl(Me.lkConcepto.EditValue) & " " & _
+                    "AND nEmpresa = " & intEmpresa & " " & _
+                    "ORDER BY nRecno"
+        '--
+        ds = funFillDataSet(strSQL)
+        '--
+        Me.gcDetalle.DataSource = funFillDataSet(strSQL).Tables(0)
+        '--
+        GridViewStyle(Me.gvDetalle)
+        funOcultarTodasLasColumnas(Me.gvDetalle)
+        indice = 0
+        '--
+        '-- funSetColumna(gvDetalle, "nCode", "No.", funIndice(), 50, 1)
+        funSetColumna(gvDetalle, "strClave", "Cod.", funIndice(), 90, 1)
+        funSetColumna(gvDetalle, "strData", "Descripción", funIndice(), 200, 1)
+        funSetColumna(gvDetalle, "nCantidad", "Cantidad", funIndice(), 70, 1, , , "n2", 3, , DevExpress.Utils.FormatType.Numeric)
+        funSetColumna(gvDetalle, "nPUnitario", "P.Unitario", funIndice(), 80, 1, , , "n4", 3, , DevExpress.Utils.FormatType.Numeric)
+        funSetColumna(gvDetalle, "nSubTotal", "Sub-Total", funIndice(), 90, 1, , , "n2", 3, , DevExpress.Utils.FormatType.Numeric)
+        funSetColumna(gvDetalle, "nMontoDescuento", "Monto Descto.", funIndice(), 90, 1, , , "n2", 3, , DevExpress.Utils.FormatType.Numeric)
+        funSetColumna(gvDetalle, "nTotalSinIva", "Total Sin  Iva", funIndice(), 90, 1, , , "n2", 3, , DevExpress.Utils.FormatType.Numeric)
+        funSetColumna(gvDetalle, "nMontoIva", "IVA", funIndice(), 80, 1, , , "n2", 3, , DevExpress.Utils.FormatType.Numeric)
+        funSetColumna(gvDetalle, "nGranTotal", "Total", funIndice(), 100, 1, , , "n2", 3, , DevExpress.Utils.FormatType.Numeric)
+        '--
+    End Sub
+
+    Private Sub funCargaCombos()
+        '-- Combo Conceptos no reservados
+        strSQL = "SELECT nCode AS nCodigo, strData AS strDescripcion " & _
+                    " FROM Inv_Concepto " & _
+                    " WHERE nCode = 5"
+        '--
+        funCargarlue(Me.lkConcepto, strSQL)
+        '--
+        '-- Combo Proveedores
+        strSQL = "SELECT nPersona AS nCodigo, strFullName AS strDescripcion " & _
+                    " FROM Gen_Clientes"
+        '--
+        funCargarlue(Me.lkProveedor, strSQL)
+        '--
+    End Sub
+
+    Private Sub funCargaData()
+        '-- GB-2012-01-12: Filtramos el registro de la cabezera
+        strSQL = "SELECT * FROM Inv_Movto_Inventario " & _
+                    "WHERE nNumero = " & Me.vnNumero & " " & _
+                    "AND nConcepto = " & Me.vnConcepto & " " & _
+                    "AND nEmpresa = " & intEmpresa & " " & _
+                    "ORDER BY nNumero"
+        '-- Cargamos el DS
+        ds = funFillDataSet(strSQL)
+        '-- Verificamos si existen registros
+        If ds.Tables("Tabla").Rows.Count >= 1 Then
+            '-- Cargamos datos
+            Me.dtpFecha.Value = ds.Tables("Tabla").Rows(0)("dtmFechaDoc").ToString
+            Me.vnConcepto = funNull2Val(ds.Tables("Tabla").Rows(0)("nConcepto"))
+            Me.lblNumero.Text = funNull2Val(ds.Tables("Tabla").Rows(0)("nNumero"))
+            Me.txtReferencia.Text = ds.Tables("Tabla").Rows(0)("strReferencia").ToString
+            Me.txtNotas.Text = ds.Tables("Tabla").Rows(0)("strNota").ToString
+            '-- 
+            Me.txtOrden.Text = ds.Tables("Tabla").Rows(0)("strOrden").ToString
+            Me.txtFactura.Text = ds.Tables("Tabla").Rows(0)("strFactura").ToString
+            Me.dtpOrden.Value = ds.Tables("Tabla").Rows(0)("dtmOrden").ToString
+            Me.dtpFactura.Value = ds.Tables("Tabla").Rows(0)("dtmFactura").ToString
+            vnProveedor = CInt(funNull2Val(ds.Tables("Tabla").Rows(0)("nOrigenDestino")))
+            '-- 2012-02-21 Agregamos: strPersonaRecibe, strPersonaAutoriza, dtmRecibido
+            Me.dtpRecibe.Value = ds.Tables("Tabla").Rows(0)("dtmRecibido").ToString
+            Me.txtRecibido.Text = ds.Tables("Tabla").Rows(0)("strPersonaRecibe").ToString
+            Me.txtAutorizado.Text = ds.Tables("Tabla").Rows(0)("strPersonaAutoriza").ToString
+        Else
+            MsgBox("No Existen Registros ... !!!", MsgBoxStyle.Critical, "Información")
+        End If
+        '--
+    End Sub
+
+    Private Function funGetTipoMovimiento()
+        '-- Tomado del proyecto PHOENIX
+        '-- Obtenemos el tipo de movimiento del concepto
+        strSQL = "SELECT nTipoConcepto " & _
+                    " FROM Inv_Concepto " & _
+                    " WHERE nCode = " & CDbl(Me.lkConcepto.EditValue)
+        '-- 1:Entrada, 2:Salida
+        vnTipoMovimiento = funGetValor(strSQL)
+        Return True
+    End Function
+
+    Private Function funCalcularTotalFinal()
+        If Val(Me.lblTotal.Text) > 0 Then
+            Me.lblTotalNeto.Text = (CDbl(Me.lblTotal.Text) + CDbl(Me.lblTax.Text)).ToString("n2")
+        End If
+        Return True
+    End Function
+
+    Private Sub bbSave_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles bbSave.ItemClick
+        If Validar() = True Then
+            If MessageBox.Show("¿ Desea Grabar los datos ahora ...?", "ATENCION !!!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = MsgBoxResult.Yes Then
+                Guardar()
+            End If
+        End If
+    End Sub
+
+    Private Function Validar() As Boolean
+        If Me.lkConcepto.EditValue = 0 Then
+            Me.lkConcepto.Focus()
+            Me.lkConcepto.SelectAll()
+            MsgBox("Falta Concepto !!!", MsgBoxStyle.Critical, "Atención !!!")
+            Return False
+        ElseIf Me.gvDetalle.RowCount = 0 Then
+            MsgBox("Falta detalle de Productos   !!!", MsgBoxStyle.Critical, "Atención !!!")
+            Me.gcDetalle.Focus()
+            Return False
+        ElseIf Len(Trim(Me.txtReferencia.Text)) = 0 Then
+            Me.txtReferencia.Focus()
+            MsgBox("Falta No. de Entrada !!!", MsgBoxStyle.Critical, "Atención !!!")
+            Return False
+        ElseIf Me.lkProveedor.EditValue = 0 Then
+            Me.lkProveedor.Focus()
+            Me.lkProveedor.SelectAll()
+            MsgBox("Falta Proveedor !!!", MsgBoxStyle.Critical, "Atención !!!")
+            Return False
+        ElseIf Len(Trim(Me.txtOrden.Text)) = 0 Then
+            Me.txtOrden.Focus()
+            MsgBox("Falta No. de Orden de Compra !!!", MsgBoxStyle.Critical, "Atención !!!")
+        ElseIf Len(Trim(Me.txtFactura.Text)) = 0 Then
+            Me.txtFactura.Focus()
+            MsgBox("Falta No. de Factura !!!", MsgBoxStyle.Critical, "Atención !!!")
+            Return False
+        ElseIf Len(Trim(Me.txtRecibido.Text)) = 0 Then
+            Me.txtRecibido.Focus()
+            MsgBox("Falta Recibido Por !!!", MsgBoxStyle.Critical, "Atención !!!")
+            Return False
+        ElseIf Len(Trim(Me.txtAutorizado.Text)) = 0 Then
+            Me.txtAutorizado.Focus()
+            MsgBox("Falta Autorizado Por !!!", MsgBoxStyle.Critical, "Atención !!!")
+            Return False
+        End If
+        If nTipo = 1 Then
+            '-- 2012-03-15: Filtro combinado 
+            strSQL = "SELECT * " & _
+                        "FROM Inv_Movto_Inventario " & _
+                        "WHERE strReferencia = '" & Trim(Me.txtReferencia.Text) & "' " & _
+                        "AND nConcepto = " & Me.lkConcepto.EditValue & " " & _
+                        "AND nEmpresa = " & intEmpresa
+            '--
+            If funGetValor(strSQL) > 0 Then
+                Me.txtReferencia.Focus()
+                Me.txtReferencia.SelectAll()
+                MsgBox("El documento ya fue registrado !!!", MsgBoxStyle.Critical, "Atención !!!")
+                Return False
+            End If
+        End If
+        Return True
+    End Function
+
+    Private Sub lkConcepto_EditValueChanged(sender As System.Object, e As System.EventArgs)
+        If Me.bolInicio = False Then
+            '-- Obtenemos el nuevo numero de movimiento de inventario
+            Me.lblNumero.Text = funNuevoMovInventario(Me.lkConcepto.EditValue)
+            vnNumero = funNuevoMovInventario(Me.lkConcepto.EditValue)
+            '-- Obtener el tipo de movimiento
+            funGetTipoMovimiento()
+        End If
+    End Sub
+
+    Private Sub bClose_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles bClose.ItemClick
+        Me.Close()
+    End Sub
+
+    Private Sub frmInvCompra_Data_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
+        If e.KeyData = Keys.Enter Then
+            SendKeys.Send("{TAB}")
+        End If
+        '--
+        Select Case e.KeyCode
+            Case Keys.F1
+                subAdd()
+            Case Keys.F2
+                subEdit()
+            Case Keys.F3
+                subKardex()
+        End Select
+    End Sub
+
+    Private Sub bbAdd_Click(sender As System.Object, e As System.EventArgs) Handles bbAdd.Click
+        '- Constar lineas
+        If gvDetalle.RowCount >= 500 Then
+            MsgBox("No puede agregar mas lineas a este documento, el limite es 500 !!!", MsgBoxStyle.Information, "Atención !!!")
+        Else
+            subAdd()
+        End If
+
+    End Sub
+
+    Private Sub subAdd()
+        Dim f As New frmReceta_Seek
+        f.barText.Caption = "Agregando Producto"
+        f.nTransaction = 1
+        f.nTipo = nTipo '-- 1: Agregando documento, 2: Editando Documento
+        f.ShowDialog()
+        '--
+        If bolFound = True Then
+            nTipoMovGrid = 1
+            funCargaGrid()
+            funCalculoTotalProducto()
+        End If
+        '--
+    End Sub
+
+    Private Sub bbEdit_Click(sender As System.Object, e As System.EventArgs) Handles bbEdit.Click
+        '--
+        subEdit()
+        '--
+    End Sub
+
+    Private Sub gcDetalle_DoubleClick(sender As System.Object, e As System.EventArgs) Handles gcDetalle.DoubleClick
+        '--
+        subEdit()
+        '--
+    End Sub
+
+    Private Sub subEdit()
+        With Me.gvDetalle
+            If .RowCount > 0 Then
+                Dim f As New frmReceta_Seek
+                f.barText.Caption = "Editanto Producto"
+                '-- Esto lo hago porque la variable publica me guarda el ultimo valor del vnCode que guardo en el grid
+                vnCode = .GetFocusedRowCellValue(.Columns("nCode"))
+                f.lblCode.Text = .GetFocusedRowCellValue(.Columns("nCode"))
+                f.lblClave.Text = .GetFocusedRowCellValue(.Columns("strClave"))
+                f.lblData.Text = .GetFocusedRowCellValue(.Columns("strData"))
+                'f.cbCantidad.Value = funNull2Val(.GetFocusedRowCellValue(.Columns("nCantidad")))
+                'f.cbPrecio.Value = funNull2Val(.GetFocusedRowCellValue(.Columns("nPUnitario")))
+                f.cbCantidad2.Value = funNull2Val(.GetFocusedRowCellValue(.Columns("nCantidad")))
+                f.cbPrecio2.Value = funNull2Val(.GetFocusedRowCellValue(.Columns("nPUnitario")))
+                f.cbIva.Value = funNull2Val(.GetFocusedRowCellValue(.Columns("nPerIva")))
+                f.cbDescuento.Value = funNull2Val(.GetFocusedRowCellValue(.Columns("nPerDescuento")))
+                f.nTransaction = 2
+                f.nTipo = nTipo '-- 1: Agregando documento, 2: Editando Documento
+                '--
+                f.ShowDialog()
+                If bolFound = True Then
+                    nTipoMovGrid = 2
+                    funCargaGrid()
+                    funCalculoTotalProducto()
+                End If
+            End If
+        End With
+    End Sub
+
+    Private Sub funCargaGrid()
+        '-- 22/07/2009: Agregando al grid detalle
+        Dim vnPercentDescuento, vnImporte, vnMontoDescuento, vnMontoSinIva, vnMontoIva As Double
+        '-- MsgBox(vnCode)
+        With Me.gvDetalle
+            For i = 0 To Me.gvDetalle.RowCount - 1
+                If vnCode = Me.gvDetalle.GetRowCellValue(i, "nCode") And nTipoMovGrid = 1 Then
+                    MsgBox("Este producto ya esta en la Orden de Entrada !!!", MsgBoxStyle.Information, "Atención")
+                    Exit Sub
+                End If
+            Next
+            If nTipoMovGrid = 1 Then
+                .AddNewRow()
+            End If
+            .SetFocusedRowCellValue(.Columns("nCode"), vnCode)
+            .SetFocusedRowCellValue(.Columns("strClave"), vcCode)
+            .SetFocusedRowCellValue(.Columns("strData"), vcData)
+            .SetFocusedRowCellValue(.Columns("nCantidad"), funNull2Val(vnCantidad))
+            .SetFocusedRowCellValue(.Columns("nPUnitario"), funNull2Val(vnPrecioUnitario))
+            .SetFocusedRowCellValue(.Columns("nSubTotal"), funNull2Val(vnCantidad) * funNull2Val(vnPrecioUnitario))
+            If vnDescuento > 0 Then
+                vnPercentDescuento = funNull2Val(vnDescuento) / 100
+                vnImporte = funNull2Val(vnCantidad) * funNull2Val(vnPrecioUnitario)
+                vnMontoDescuento = vnImporte * vnPercentDescuento
+                vnMontoSinIva = vnImporte - vnMontoDescuento
+                .SetFocusedRowCellValue(.Columns("nPerDescuento"), vnDescuento)
+                .SetFocusedRowCellValue(.Columns("nMontoDescuento"), vnMontoDescuento)
+                .SetFocusedRowCellValue(.Columns("nTotalSinIva"), vnMontoSinIva)
+            Else
+                vnPercentDescuento = 0
+                vnImporte = funNull2Val(vnCantidad) * funNull2Val(vnPrecioUnitario)
+                vnMontoDescuento = vnImporte * vnPercentDescuento
+                vnMontoSinIva = vnImporte - vnMontoDescuento
+                .SetFocusedRowCellValue(.Columns("nPerDescuento"), vnDescuento)
+                .SetFocusedRowCellValue(.Columns("nMontoDescuento"), vnMontoDescuento)
+                .SetFocusedRowCellValue(.Columns("nTotalSinIva"), vnMontoSinIva)
+            End If
+            If vnIva = 0 Then '-- Si es Exento
+                vnMontoIva = 0
+                .SetFocusedRowCellValue(.Columns("nMontoIva"), vnMontoIva)
+            Else
+                vnMontoIva = vnMontoSinIva * 0.13
+                .SetFocusedRowCellValue(.Columns("nMontoIva"), vnMontoIva)
+            End If
+            .SetFocusedRowCellValue(.Columns("nGranTotal"), vnMontoSinIva + vnMontoIva)
+            .SetFocusedRowCellValue(.Columns("nPerIva"), vnIva)
+            '--
+            .UpdateCurrentRow()
+        End With
+        If Me.gvDetalle.RowCount > 0 Then
+            Dim nRecords As Integer
+            nRecords = Me.gvDetalle.RowCount
+            'Me.barRecord.Caption = "Registros : " & nRecords
+        End If
+    End Sub
+
+    Private Sub funCalculoTotalProducto()
+        '-- Calculamos el SubTotal del Grid
+        If Me.gvDetalle.RowCount = 0 Then
+            Me.lblSubTotal.Text = 0
+            Me.lblDescuento.Text = 0
+            Me.lblTotal.Text = 0
+            Me.lblTax.Text = 0
+            Me.lblTotalNeto.Text = 0
+            Exit Sub
+        End If
+        Dim vnsumTotal, vnSumDescuento, vnSumSubTotal, vnSumIva, vnSumGranTotal As Double
+        For i = 0 To Me.gvDetalle.RowCount - 1
+            vnSumSubTotal += funNull2Val(Me.gvDetalle.GetDataRow(i)("nSubTotal"))
+            vnSumDescuento += funNull2Val(Me.gvDetalle.GetDataRow(i)("nMontoDescuento"))
+            vnsumTotal += funNull2Val(Me.gvDetalle.GetDataRow(i)("nTotalSinIva"))
+            vnSumIva += funNull2Val(Me.gvDetalle.GetDataRow(i)("nMontoIva"))
+            vnSumGranTotal += funNull2Val(Me.gvDetalle.GetDataRow(i)("nGranTotal"))
+        Next
+        '--
+        Me.lblSubTotal.Text = vnSumSubTotal.ToString("n2")
+        Me.lblDescuento.Text = vnSumDescuento.ToString("n2")
+        Me.lblTotal.Text = vnsumTotal.ToString("n2")
+        Me.lblTax.Text = vnSumIva.ToString("n2")
+        Me.lblTotalNeto.Text = vnSumGranTotal.ToString("n2")
+        '--
+    End Sub
+
+    Private Sub bbKardex_Click(sender As System.Object, e As System.EventArgs) Handles bbKardex.Click
+        subKardex()
+    End Sub
+
+    Private Sub subKardex()
+        With Me.gvDetalle
+            If .RowCount > 0 Then
+                Dim f As New frmKardexOpen
+                f.nCode = funNull2Val(.GetFocusedRowCellValue(.Columns("nCode")))
+                f.ShowDialog()
+            End If
+        End With
+    End Sub
+
+    Private Sub Guardar()
+        '--
+        AbrirConexionGlobal()
+        Try
+            '-- GB-2012-01-09: Multiples conexiones, renumera codigo
+            If nTipo = 1 Then
+                vnNumero = funNuevoMovInventario(Me.lkConcepto.EditValue)
+            End If
+            '-- Datos de la transacción
+            strSQL = "SELECT * FROM Inv_Movto_Inventario " & _
+                       "WHERE nNumero = " & Me.vnNumero & " " & _
+                       "AND nConcepto = " & Me.lkConcepto.EditValue & " " & _
+                       "AND nEmpresa = " & intEmpresa & " " & _
+                       "ORDER BY nNumero"
+            '--
+            Dim dsAgregar As DataSet = funFillDataSet(strSQL)
+            If dsAgregar.Tables("Tabla").Rows.Count = 0 Then
+                vnNumero = funNuevoMovInventario(Me.lkConcepto.EditValue)
+                dsAgregar.Tables("Tabla").Rows.Add()
+            End If
+            '--
+            With dsAgregar.Tables("Tabla").Rows(0)
+                '-- Fecha del Servidor
+                varToday = funFechaServer()
+                '-- Tomamos el nRecno
+                Dim vnRecno = funNull2Val(.Item("nRecno"))
+                '-- Tipo de Accion para Guardar: 1:Add, 2:Update
+                intTipoRegistro = IIf(funNull2Val(.Item("nRecno")) = 0, 1, 2)
+                '--
+                If intTipoRegistro = 1 Then
+                    '-- Insertando
+                    funAddCampo("nEmpresa", intEmpresa, 0)
+                    funAddCampo("nConcepto", Me.lkConcepto.EditValue, 0)
+                    funAddCampo("nNumero", vnNumero, vnNumero)
+                    funAddCampo("nTipoMovto", vnTipoMovimiento, 0)
+                    funAddCampo("dtmFechaDoc", funFechaSql(Me.dtpFecha.Value.Date), "")
+                    funAddCampo("dtmRecibido", funFechaSql(Me.dtpRecibe.Value.Date), "")
+                    funAddCampo("strReferencia", Trim(Me.txtReferencia.Text), "")
+                    funAddCampo("strNota", Trim(Me.txtNotas.Text), "")
+                    '-- 2012-01-12
+                    funAddCampo("strOrden", Trim(Me.txtOrden.Text), "")
+                    funAddCampo("strFactura", Trim(Me.txtFactura.Text), "")
+                    funAddCampo("dtmOrden", funFechaSql(Me.dtpOrden.Value.Date), "")
+                    funAddCampo("dtmFactura", funFechaSql(Me.dtpFactura.Value.Date), "")
+                    funAddCampo("nOrigenDestino", Me.lkProveedor.EditValue, 0)
+                    funAddCampo("strOrigenDestino", Me.lkProveedor.Text, "")
+                    '-- Datos del registro
+                    funAddCampo("strUserAdd", strUser, "")
+                    funAddCampo("strUserUpdate", strUser, "")
+                    funAddCampo("dtmUpdate", funFechaSql(varToday), "")
+                    '-- 
+                    funAddCampo("nTotal", CDbl(Me.lblTotalNeto.Text), 0)
+                    '-- 2012-02-21 Agregamos recibido y autorizado
+                    funAddCampo("strPersonaRecibe", Trim(Me.txtRecibido.Text), "")
+                    funAddCampo("strPersonaAutoriza", Trim(Me.txtAutorizado.Text), "")
+                Else
+                    funAddCampo("dtmFechaDoc", funFechaSql(Me.dtpFecha.Value.Date), .Item("dtmFechaDoc").ToString)
+                    funAddCampo("dtmRecibido", funFechaSql(Me.dtpRecibe.Value.Date), .Item("dtmRecibido").ToString)
+                    funAddCampo("strReferencia", Trim(Me.txtReferencia.Text), .Item("strReferencia").ToString)
+                    funAddCampo("strNota", Trim(Me.txtNotas.Text), .Item("strNota").ToString)
+                    funAddCampo("strUserUpdate", strUser, .Item("strUserUpdate").ToString)
+                    funAddCampo("dtmUpdate", funFechaSql(varToday), .Item("dtmUpdate").ToString)
+                    '-- funAddCampo("nSubTotal", CDbl(Me.lblTotalNeto.Text), .Item("strUserUpdate"))
+                    '-- 2012-02-21 Agregamos recibido y autorizado
+                    funAddCampo("strPersonaRecibe", Trim(Me.txtRecibido.Text), .Item("strPersonaRecibe").ToString)
+                    funAddCampo("strPersonaAutoriza", Trim(Me.txtAutorizado.Text), .Item("strPersonaAutoriza").ToString)
+                End If
+                '-- Filtro para Llave 
+                strLlave = " nEmpresa = " & intEmpresa & " " & _
+                            "AND nConcepto = " & Me.lkConcepto.EditValue & " " & _
+                            "AND nNumero = " & vnNumero
+                '--
+                funParametrosGrabacionTransaccion("Inv_Movto_Inventario", strLlave, intTipoRegistro, vnRecno)
+                '-- Grabamos el Detalle del Movimiento
+                funGrabarDetalle()
+                '-- Grabamos el Mestro del Inventario
+                funSaveMasterInventario()
+                '-- Grabamos Existencia
+                funSaveSaldoPorBodega()
+                '--
+                transaccionGlobal.Commit()
+            End With
+        Catch ex As Exception
+            LimpiarCampos()
+            transaccionGlobal.Rollback()
+            DBConnGlobal.Close()
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+        DBConnGlobal.Close()
+        Me.Close()
+        '--
+    End Sub
+
+    Function funGrabarDetalle()
+        '-- Tomado del proyecto PROINCO
+        Dim dsDetalle As New DataSet
+        '--
+        For i = 0 To Me.gvDetalle.RowCount - 1
+            varToday = funFechaServer() '-- Fechas, horas, minutos y segundos
+            '--
+            funAddCampo("nEmpresa", intEmpresa, intEmpresa)
+            funAddCampo("nConcepto", Me.lkConcepto.EditValue, 0)
+            funAddCampo("nNumero", vnNumero, vnNumero)
+            funAddCampo("nCode", Me.gvDetalle.GetDataRow(i)("nCode"), 0)
+            funAddCampo("strClave", Me.gvDetalle.GetDataRow(i)("strClave").ToString, "")
+            funAddCampo("nTipoMovto", vnTipoMovimiento, 0) '-- 1:Entrada, 2:Salida
+            funAddCampo("strData", Me.gvDetalle.GetDataRow(i)("strData").ToString, "")
+            funAddCampo("nCantidad", Me.gvDetalle.GetDataRow(i)("nCantidad"), 0)
+            funAddCampo("nPUnitario", Me.gvDetalle.GetDataRow(i)("nPUnitario"), 0)
+            funAddCampo("nSubTotal", Me.gvDetalle.GetDataRow(i)("nSubTotal"), 0)
+            funAddCampo("nMontoDescuento", Me.gvDetalle.GetDataRow(i)("nMontoDescuento"), 0)
+            funAddCampo("nMontoIva", Me.gvDetalle.GetDataRow(i)("nMontoIva"), 0)
+            funAddCampo("nTotalSinIva", Me.gvDetalle.GetDataRow(i)("nTotalSinIva"), 0)
+            funAddCampo("nGranTotal", Me.gvDetalle.GetDataRow(i)("nGranTotal"), 0)
+            funAddCampo("nPerDescuento", Me.gvDetalle.GetDataRow(i)("nPerDescuento"), 0)
+            funAddCampo("nPerIva", Me.gvDetalle.GetDataRow(i)("nPerIva"), 0)
+            '-- 
+            funAddCampo("strUserAdd", strUser, "")
+            funAddCampo("strUserUpdate", strUser, "")
+            funAddCampo("dtmUpdate", funFechaSql(varToday), "")
+            '--
+            '--
+            Dim nTipoD As Integer
+            Dim nRecno As Integer
+            '--
+            If funNull2Val(("nRecno")) = 0 Then
+                nTipoD = 1
+            Else
+                nTipoD = 2
+                nRecno = funNull2Val(("nRecno"))
+            End If
+            '-- 
+            strLlave = " nEmpresa = " & intEmpresa & " " & _
+                        "AND nConcepto = " & CDbl(Me.lkConcepto.EditValue) & " " & _
+                        "AND nNumero = " & vnNumero & " " & _
+                        "AND nCode = " & Me.gvDetalle.GetDataRow(i)("nCode")
+            '--
+            funParametrosGrabacionTransaccion("Inv_Movto_Inventario_Detalle", strLlave, nTipoD, nRecno, , 0)
+            '--
+        Next
+        Return True
+    End Function
+
+    Function funSaveMasterInventario()
+        '-- Tomado del proyecto PHOENIX
+        For i = 0 To Me.gvDetalle.RowCount - 1
+            varToday = funFechaServer() '-- Fechas, horas, minutos y segundos
+            '-- Seleccionamos el Recno del Registro de la tabla Master_Inventario
+            Dim nTipoD, nRecno, vnRecnoMI As Integer
+            '--
+            strSQL = "SELECT nRecno FROM Inv_Master_Inventario " & _
+                        "WHERE nEmpresa  = " & intEmpresa & " " & _
+                        "AND nConcepto = " & CDbl(Me.lkConcepto.EditValue) & " " & _
+                        "AND nNumero = " & vnNumero & " " & _
+                        "AND nCode = " & funNull2Val(Me.gvDetalle.GetDataRow(i)("nCode"))
+            '--
+            vnRecnoMI = funGetValorTransaccion(strSQL)
+            nRecno = vnRecnoMI
+            '--
+            funAddCampo("nEmpresa", intEmpresa, 0)
+            funAddCampo("nConcepto", Me.lkConcepto.EditValue, 0)
+            funAddCampo("nNumero", vnNumero, 0)
+            funAddCampo("nCode", Me.gvDetalle.GetDataRow(i)("nCode"), 0)
+            funAddCampo("nTipoMovto", vnTipoMovimiento, 0)
+            funAddCampo("dtmFechaDoc", funFechaSql(Me.dtpFecha.Value.Date), "")
+            '--
+            funAddCampo("nCantidad", Me.gvDetalle.GetDataRow(i)("nCantidad"), 0)
+            funAddCampo("nPUnitario", Me.gvDetalle.GetDataRow(i)("nPUnitario"), 0)
+            funAddCampo("nSubTotal", Me.gvDetalle.GetDataRow(i)("nSubTotal"), 0)
+            funAddCampo("nMontoDescuento", Me.gvDetalle.GetDataRow(i)("nMontoDescuento"), 0)
+            funAddCampo("nMontoIva", Me.gvDetalle.GetDataRow(i)("nMontoIva"), 0)
+            funAddCampo("nTotalSinIva", Me.gvDetalle.GetDataRow(i)("nTotalSinIva"), 0)
+            funAddCampo("nGranTotal", Me.gvDetalle.GetDataRow(i)("nGranTotal"), 0)
+            funAddCampo("nPerDescuento", Me.gvDetalle.GetDataRow(i)("nPerDescuento"), 0)
+            funAddCampo("nPerIva", Me.gvDetalle.GetDataRow(i)("nPerIva"), 0)
+            '-- 2012-01-12
+            funAddCampo("strOrden", Trim(Me.txtOrden.Text), "")
+            funAddCampo("strFactura", Trim(Me.txtFactura.Text), "")
+            funAddCampo("dtmOrden", funFechaSql(Me.dtpOrden.Value.Date), "")
+            funAddCampo("dtmFactura", funFechaSql(Me.dtpFactura.Value.Date), "")
+            '-- 2012-19-01: Cuando es una compra que ponga al proveedor
+            funAddCampo("nOrigenDestino", Me.lkProveedor.EditValue, 0)
+            funAddCampo("strOrigenDestino", Me.lkProveedor.Text, "")
+            funAddCampo("strReferencia", Trim(Me.txtReferencia.Text), "")
+            '-- Grabamos los datos del usuario
+            funAddCampo("strUserAdd", strUser, "")
+            funAddCampo("strUserUpdate", strUser, "")
+            funAddCampo("dtmUpdate", funFechaSql(varToday), "")
+            '--        
+            If nRecno = 0 Then
+                nTipoD = 1
+            Else
+                nTipoD = 2
+                nRecno = funNull2Val(("nRecno"))
+            End If
+            '-- 
+            strLlave = " nEmpresa = " & intEmpresa & " " & _
+                        "AND nConcepto = " & CDbl(Me.lkConcepto.EditValue) & " " & _
+                        "AND nNumero = " & vnNumero & " " & _
+                        "AND nCode = " & Me.gvDetalle.GetDataRow(i)("nCode")
+            '--
+            funParametrosGrabacionTransaccion("Inv_Master_Inventario", strLlave, nTipoD, nRecno, , 0)
+        Next
+        Return True
+    End Function
+
+    Function funSaveSaldoPorBodega()
+        '-- Tomado del proyecto PHOENIX, recorremos el Grid y Actualizamos por cada producto
+        For i = 0 To Me.gvDetalle.RowCount - 1
+            '-- Segun el timpo de movimiento procedemos a actualizar
+            If vnTipoMovimiento = 1 Then
+                '-- 1:Entrada
+                strSQL = "UPDATE Inv_ProductoBodega " & _
+                            "SET nEntrada = (SELECT ISNULL(SUM(b.nCantidad),0) " & _
+                            " FROM Inv_Movto_Inventario_Detalle AS b " & _
+                            " WHERE b.nCode = " & funNull2Val(Me.gvDetalle.GetDataRow(i)("nCode")) & _
+                            " AND b.nEmpresa = " & intEmpresa & _
+                            " AND b.nTipoMovto = 1) " & _
+                            " WHERE nCode = " & funNull2Val(Me.gvDetalle.GetDataRow(i)("nCode")) & _
+                            " AND nEmpresa = " & intEmpresa
+                '--
+                funRunSQLTransaccion(strSQL)
+                '-- 2012-01-29: Actualizamos el precio por empresa, podriamos guardar el precio anterior antes de guardar
+                strSQL = "UPDATE Inv_ProductoBodega " & _
+                            " SET nPrecio = " & funNull2Val(Me.gvDetalle.GetDataRow(i)("nGranTotal")) / funNull2Val(Me.gvDetalle.GetDataRow(i)("nCantidad")) & _
+                            ", strUserUpdate = '" & strUser & "'" & _
+                            ", dtmUpdate = '" & Format(CDate(funFechaServer()), "s") & "'" & _
+                            " WHERE nCode = " & funNull2Val(Me.gvDetalle.GetDataRow(i)("nCode")) & _
+                            " AND nEmpresa = " & intEmpresa
+                '--
+                funRunSQLTransaccion(strSQL)
+                '--
+                'ElseIf vnTipoMovimiento = 2 Then
+                '    '-- 2:Salida
+                '    strSQL = "UPDATE Inv_ProductoBodega " & _
+                '                "SET nSalida = (SELECT ISNULL(SUM(b.nCantidad),0) " & _
+                '                "FROM Inv_Movto_Inventario_Detalle AS b " & _
+                '                " WHERE b.nCode = " & funNull2Val(Me.gvDetalle.GetDataRow(i)("nCode")) & _
+                '                " AND b.nEmpresa = " & intEmpresa & _
+                '                " AND b.nTipoMovto = 2) " & _
+                '                " WHERE nCode = " & funNull2Val(Me.gvDetalle.GetDataRow(i)("nCode")) & _
+                '                " AND nEmpresa = " & intEmpresa
+                '    '--
+                '    funRunSQLTransaccion(strSQL)
+                '    '--
+            End If
+            '--
+        Next
+        Return True
+    End Function
+
+
+    Private Sub gvDetalle_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles gvDetalle.KeyDown
+        '-- Borrar una linea, solo cuando esta agregando
+        If (e.KeyCode = Keys.Delete) And nTipo = 1 Then
+            If Me.gvDetalle.FocusedRowHandle >= 0 Then
+                r = Me.gvDetalle.FocusedRowHandle
+                If Me.gvDetalle.IsRowSelected(r) Then
+                    If (MessageBox.Show("¿Desea eliminar la Fila ?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes) Then
+                        Me.gvDetalle.DeleteRow(r)
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub TabControl1_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles TabControl1.SelectedIndexChanged
+        Me.txtRecibido.Focus()
+    End Sub
+
+    Private Sub bbProveedor_Click(sender As System.Object, e As System.EventArgs) Handles bbProveedor.Click
+        Dim f As New frmProveedor_Data
+        f.barText.Caption = "Agregando Registro ..."
+        f.nTipo = 1
+        f.ShowDialog()
+    End Sub
+
+    Private Sub SimpleButton1_Click(sender As System.Object, e As System.EventArgs) Handles SimpleButton1.Click
+        Try
+            Dim strFileName As String = Application.StartupPath & "\repEntradas.xls"
+            Me.gcDetalle.ExportToXls(strFileName)
+            System.Diagnostics.Process.Start(strFileName)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+End Class

@@ -19,7 +19,6 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
@@ -32,13 +31,13 @@ Partial Class frmMain
         Me.ssServidor = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ssBaseDatos = New System.Windows.Forms.ToolStripStatusLabel()
         Me.NavBarControl1 = New DevExpress.XtraNavBar.NavBarControl()
+        Me.navUtil = New DevExpress.XtraNavBar.NavBarGroup()
+        Me.nav2User = New DevExpress.XtraNavBar.NavBarItem()
+        Me.nav2Usuarios = New DevExpress.XtraNavBar.NavBarItem()
         Me.navCatalogo = New DevExpress.XtraNavBar.NavBarGroup()
         Me.nav2Cliente = New DevExpress.XtraNavBar.NavBarItem()
         Me.navFactura = New DevExpress.XtraNavBar.NavBarGroup()
         Me.nav2Salida = New DevExpress.XtraNavBar.NavBarItem()
-        Me.navUtil = New DevExpress.XtraNavBar.NavBarGroup()
-        Me.nav2User = New DevExpress.XtraNavBar.NavBarItem()
-        Me.nav2Usuarios = New DevExpress.XtraNavBar.NavBarItem()
         Me.nav2Parametros = New DevExpress.XtraNavBar.NavBarItem()
         Me.nav2Notas = New DevExpress.XtraNavBar.NavBarItem()
         Me.nav2Eval = New DevExpress.XtraNavBar.NavBarItem()
@@ -109,7 +108,7 @@ Partial Class frmMain
         Me.NavPagosGenerales = New DevExpress.XtraNavBar.NavBarItem()
         Me.NavFacturas = New DevExpress.XtraNavBar.NavBarItem()
         Me.nav2TipoPersona = New DevExpress.XtraNavBar.NavBarItem()
-        Me.DefaultLookAndFeel1 = New DevExpress.LookAndFeel.DefaultLookAndFeel(Me.components)
+        Me.DefaultLookAndFeel1 = New DevExpress.LookAndFeel.DefaultLookAndFeel()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.NavBarControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainCatalogos.SuspendLayout()
@@ -229,6 +228,25 @@ Partial Class frmMain
         Me.NavBarControl1.Text = "Utileria"
         Me.NavBarControl1.View = New DevExpress.XtraNavBar.ViewInfo.StandardSkinNavigationPaneViewInfoRegistrator("Money Twins")
         '
+        'navUtil
+        '
+        Me.navUtil.Caption = "Utilidades"
+        Me.navUtil.Expanded = True
+        Me.navUtil.ItemLinks.AddRange(New DevExpress.XtraNavBar.NavBarItemLink() {New DevExpress.XtraNavBar.NavBarItemLink(Me.nav2User), New DevExpress.XtraNavBar.NavBarItemLink(Me.nav2Usuarios)})
+        Me.navUtil.Name = "navUtil"
+        '
+        'nav2User
+        '
+        Me.nav2User.Caption = "Cambiar Usuario"
+        Me.nav2User.Name = "nav2User"
+        Me.nav2User.SmallImage = CType(resources.GetObject("nav2User.SmallImage"), System.Drawing.Image)
+        '
+        'nav2Usuarios
+        '
+        Me.nav2Usuarios.Caption = "Seguridad"
+        Me.nav2Usuarios.Name = "nav2Usuarios"
+        Me.nav2Usuarios.SmallImage = CType(resources.GetObject("nav2Usuarios.SmallImage"), System.Drawing.Image)
+        '
         'navCatalogo
         '
         Me.navCatalogo.Caption = "Catálogos"
@@ -252,25 +270,6 @@ Partial Class frmMain
         Me.nav2Salida.Caption = "Facturación"
         Me.nav2Salida.Name = "nav2Salida"
         Me.nav2Salida.SmallImage = CType(resources.GetObject("nav2Salida.SmallImage"), System.Drawing.Image)
-        '
-        'navUtil
-        '
-        Me.navUtil.Caption = "Utilidades"
-        Me.navUtil.Expanded = True
-        Me.navUtil.ItemLinks.AddRange(New DevExpress.XtraNavBar.NavBarItemLink() {New DevExpress.XtraNavBar.NavBarItemLink(Me.nav2User), New DevExpress.XtraNavBar.NavBarItemLink(Me.nav2Usuarios)})
-        Me.navUtil.Name = "navUtil"
-        '
-        'nav2User
-        '
-        Me.nav2User.Caption = "Cambiar Usuario"
-        Me.nav2User.Name = "nav2User"
-        Me.nav2User.SmallImage = CType(resources.GetObject("nav2User.SmallImage"), System.Drawing.Image)
-        '
-        'nav2Usuarios
-        '
-        Me.nav2Usuarios.Caption = "Seguridad"
-        Me.nav2Usuarios.Name = "nav2Usuarios"
-        Me.nav2Usuarios.SmallImage = CType(resources.GetObject("nav2Usuarios.SmallImage"), System.Drawing.Image)
         '
         'nav2Parametros
         '
