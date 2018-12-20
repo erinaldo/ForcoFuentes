@@ -167,6 +167,7 @@ Partial Class frmKupon_Data
         Me.Button1.Size = New System.Drawing.Size(120, 93)
         Me.Button1.TabIndex = 339
         Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
         '
         'Panel1
         '

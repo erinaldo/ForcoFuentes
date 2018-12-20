@@ -181,6 +181,7 @@ Partial Class frmKupon_Open
         Me.Button1.Size = New System.Drawing.Size(120, 93)
         Me.Button1.TabIndex = 5
         Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
         '
         'frmKupon_Open
         '
