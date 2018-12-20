@@ -22,11 +22,10 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Timer1 = New System.Windows.Forms.Timer()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
+        Me.Timer2 = New System.Windows.Forms.Timer()
         Me.btnMensajeRechazados = New System.Windows.Forms.Button()
         Me.btnVerificarEstado = New System.Windows.Forms.Button()
         Me.lblVerificarEstado = New System.Windows.Forms.Label()
