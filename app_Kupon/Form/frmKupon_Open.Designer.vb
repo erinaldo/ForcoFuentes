@@ -19,6 +19,7 @@ Partial Class frmKupon_Open
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmKupon_Open))
         Me.RibbonControl1 = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.barText = New DevExpress.XtraBars.BarStaticItem()
@@ -32,7 +33,7 @@ Partial Class frmKupon_Open
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar1 = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
-        Me.DefaultLookAndFeel1 = New DevExpress.LookAndFeel.DefaultLookAndFeel()
+        Me.DefaultLookAndFeel1 = New DevExpress.LookAndFeel.DefaultLookAndFeel(Me.components)
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
         Me.gcConcepto = New DevExpress.XtraGrid.GridControl()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
