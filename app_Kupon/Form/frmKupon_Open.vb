@@ -10,7 +10,7 @@ Public Class frmKupon_Open
     Dim strFormula As String
 
     Private Sub bbClose_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles bbClose.ItemClick
-        Me.Close()
+        Me.Close() 'Prueba
     End Sub
 
     Private Sub frmKupon_Open_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
